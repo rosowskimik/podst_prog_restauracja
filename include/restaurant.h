@@ -1,0 +1,3 @@
+namespace restaurant {
+int test();
+}
