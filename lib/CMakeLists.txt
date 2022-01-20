@@ -1,5 +1,10 @@
 # Library files
 list(APPEND LIB_LIST
+    meal
+    category
+    menu
+    order
+    history
     restaurant
 )
 
