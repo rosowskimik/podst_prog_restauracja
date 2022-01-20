@@ -3,7 +3,6 @@
 #include <ctime>
 #include <filesystem>
 #include <fstream>
-#include <optional>
 #include <sstream>
 #include <string_view>
 #include <utility>

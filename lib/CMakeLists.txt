@@ -1,4 +1,4 @@
-# Library files
+# .h + .cpp files
 list(APPEND LIB_LIST
     meal
     category
@@ -9,11 +9,18 @@ list(APPEND LIB_LIST
 )
 
 # Header files
-list(TRANSFORM LIB_LIST PREPEND ../include/ OUTPUT_VARIABLE HEADER_LIST)
-list(TRANSFORM HEADER_LIST APPEND .h)
+list(TRANSFORM LIB_LIST APPEND .h OUTPUT_VARIABLE HEADER_LIST)
+
+# .h only
+list(APPEND HEADER_LIST)
+
+list(TRANSFORM HEADER_LIST PREPEND ../include/ )
 
 # Library source files
 list(TRANSFORM LIB_LIST APPEND .cpp OUTPUT_VARIABLE SOURCE_LIST)
+
+# .cpp only
+list(APPEND SOURCE_LIST)
 
 add_library(restaurant)
 

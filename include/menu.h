@@ -2,7 +2,6 @@
 #define __MENU_H__
 
 #include <filesystem>
-#include <optional>
 #include <string_view>
 #include <vector>
 
@@ -41,7 +40,7 @@ class Menu {
    */
   size_t size() const;
 
-  std::optional<const Meal> meal(size_t index) const;
+  const Meal& meal(size_t index) const;
 
   /**
    * @brief Create new order

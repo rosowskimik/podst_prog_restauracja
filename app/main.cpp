@@ -40,32 +40,16 @@ int main() {
   Order new_order = menu.new_order();
 
   // Spróbuj wyciągnąć danie po indeksie
-  // Zwraca to optional<Meal>,
-  auto maybe_meal = menu.meal(0);
+  // (jeśli będziemy poza indeksem, to się wysypiemy)
+  const Meal& meal = menu.meal(0);
 
-  // Który w ifie zwróci true jeżeli indeks mieści się w rozmiarze naszego menu:
-  if (maybe_meal) {
-    std::cout << "Danie istnieje\n";
-
-    // Gdy mamy pewność, że indeks był w zasięgu (np w wyższym ifie
-    // lub gdy jesteśmy pewni, że index < menu.size()),
-    // możemy dostać się do tego dania przez wartość, jakby była wskaźnikiem:
-
-    std::cout << "Jego nazwa to: " << maybe_meal->name() << '\n'
-              << "A cena: " << maybe_meal->price() << '\n';
-
-    // Dodaj danie do zamówienia
-    new_order.add_meal(*maybe_meal);
-    // Danie może się powtórzyć
-    new_order.add_meal(*maybe_meal);
-
-  } else {
-    std::cout << "danie nie istnieje\n";
-  }
-
-  // Jeszcze pare innych dań (jeśli będziemy poza indeksem, to się wysypiemy)
-  new_order.add_meal(*menu.meal(1));
-  new_order.add_meal(*menu.meal(2));
+  // Dodaj danie do zamówienia
+  new_order.add_meal(meal);
+  // Danie może się powtórzyć
+  new_order.add_meal(meal);
+  // Jeszcze pare innych dań
+  new_order.add_meal(menu.meal(1));
+  new_order.add_meal(menu.meal(2));
 
   // Możemy przejrzeć wszystkie elementy w zamówieniu, wraz z ich ilością:
   for (const auto& [meal, count] : new_order.entries()) {

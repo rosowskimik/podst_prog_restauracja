@@ -1,7 +1,6 @@
 #include "menu.h"
 
 #include <filesystem>
-#include <optional>
 #include <string_view>
 #include <utility>
 #include <vector>
@@ -21,15 +20,14 @@ Menu::Menu(fs::path menu_path) : m_directory(menu_path) {
 
 const std::vector<Category>& Menu::categories() const { return m_categories; }
 
-std::optional<const Meal> Menu::meal(size_t index) const {
+const Meal& Menu::meal(size_t index) const {
   for (const auto& category : m_categories) {
     if (category.meals().size() > index) {
-      return std::optional(category.meals()[index]);
+      return category.meals()[index];
     } else {
       index -= category.meals().size();
     }
   }
-  return std::nullopt;
 }
 
 size_t Menu::size() const {
