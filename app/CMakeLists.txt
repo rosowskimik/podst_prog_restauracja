@@ -10,4 +10,4 @@ add_executable(admin)
 
 target_sources(admin PRIVATE admin.cpp)
 
-target_link_libraries(restauracja PRIVATE restaurant)
+target_link_libraries(admin PRIVATE restaurant)
