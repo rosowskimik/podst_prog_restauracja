@@ -1,8 +1,10 @@
 # Library files
 list(APPEND LIB_LIST
-    entry
+    meal
     category
     menu
+    order
+    history
     restaurant
 )
 

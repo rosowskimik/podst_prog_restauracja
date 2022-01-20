@@ -6,17 +6,15 @@
 #include <string_view>
 #include <vector>
 
-namespace restaurant {
 namespace fs = std::filesystem;
-using uint = unsigned int;
 
-class Entry;
+class Meal;
 class Menu;
 
 class Category {
  private:
   std::string m_name;
-  std::vector<Entry> m_entries;
+  std::vector<Meal> m_entries;
   fs::path m_file;
 
   friend Menu;
@@ -26,12 +24,22 @@ class Category {
 
   Category(fs::path category_path);
 
+  /**
+   * @brief Get Category name
+   *
+   * @return const std::string&
+   */
   const std::string& name() const;
-  const std::vector<Entry>& entries() const;
 
-  void add_entry(std::string_view entry_name, uint entry_price);
+  /**
+   * @brief Get Category's Meals.
+   *
+   * @return const std::vector<Meal>&
+   */
+  const std::vector<Meal>& meals() const;
 
-  void writeToFile() const;
+  // void add_entry(std::string_view entry_name, uint entry_price);
+
+  // void writeToFile() const;
 };
-}  // namespace restaurant
 #endif  // __CATEGORY_H__
