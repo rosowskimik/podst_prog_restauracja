@@ -12,7 +12,7 @@ int main() {
   History historia("data/history.txt");
 
   // Wyciągnij nazwę restauracji z pliku
-  std::string nazwa = get_name("data/setup.txt");
+  std::string nazwa = load_name("data/setup.txt");
   std::cout << nazwa << '\n';
 
   std::cout << std::endl;
@@ -73,6 +73,10 @@ int main() {
   for (const Order& order : historia.orders()) {
     std::cout << "Dnia: " << order.date() << " placono: " << order.price_sum()
               << '\n';
+    std::cout << "Zamowiono: " << '\n';
+    for (const auto& entry : order.entries()) {
+      std::cout << entry.first.name() << '\n';
+    }
   }
 
   return 0;

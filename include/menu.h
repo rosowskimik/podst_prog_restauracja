@@ -12,8 +12,11 @@
 namespace fs = std::filesystem;
 
 class Menu {
+ public:
+  using Categories = std::vector<Category>;
+
  private:
-  std::vector<Category> m_categories;
+  Categories m_categories;
   fs::path m_directory;
 
  public:
@@ -22,16 +25,16 @@ class Menu {
   /**
    * @brief Construct a new Menu object
    *
-   * @param menu_path path to directory holding all menu files
+   * @param menu_path path to directory holding all Category files
    */
   Menu(fs::path menu_path);
 
   /**
-   * @brief Returns a vector of all categories.
+   * @brief Returns a list of all Categories.
    *
    * @return const std::vector<Category>&
    */
-  const std::vector<Category>& categories() const;
+  const Categories& categories() const;
 
   /**
    * @brief Returns the count of all Meals in Menu.
@@ -40,15 +43,21 @@ class Menu {
    */
   size_t size() const;
 
+  /**
+   * @brief Return a Meal at index.
+   *
+   * @param index index of meal to get
+   * @return const Meal&
+   * @warning This function will throw if index >= Menu::size()
+   */
   const Meal& meal(size_t index) const;
 
   /**
-   * @brief Create new order
+   * @brief Creates new Order object.
    *
    * @return Order
+   * @see Order
    */
   Order new_order() const;
-
-  // Category& add_category(std::string_view category_name);
 };
 #endif  // __MENU_H__

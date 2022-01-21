@@ -10,45 +10,51 @@ using uint = unsigned int;
 
 class Order {
  public:
-  using Meals = std::unordered_map<Meal, uint>;
+  using Entiries = std::unordered_map<Meal, uint>;
 
  private:
   std::string m_date;
-  Meals m_meals;
+  Entiries m_meals;
 
  public:
   Order();
 
-  Order(std::istream& in);
-
   bool operator==(const Order& rhs) const;
 
   /**
-   * @brief Get order date
+   * @brief Construct a new Order object
+   *
+   * @param input an input stream to load this Order from
+   */
+  Order(std::istream& input);
+
+  /**
+   * @brief Get Order's date
    *
    * @return const std::string&
    */
   const std::string& date() const;
 
   /**
-   * @brief Get order entries
+   * @brief Get Order's Meals
    *
-   *
-   * @return const Entries& (Meal -> Count)
+   * @return const std::unordered_map<Meal, unsigned int>&
    */
-  const Meals& entries() const;
+  const Entiries& entries() const;
 
   /**
-   * @brief Returns the price of all entries in order.
+   * @brief Returns the price of all Meals in order.
    *
-   * @return const uint
+   * @return const double
    */
   const double price_sum() const;
 
   /**
    * @brief Adds a Meal to an Order
    *
-   * @param m A Meal to add example: order.add_meal(*menu.meal(0));
+   * @param m a Meal to add
+   * @see Meal
+   * @see Menu::meal(index)
    */
   void add_meal(const Meal& m);
 

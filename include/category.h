@@ -12,9 +12,12 @@ class Meal;
 class Menu;
 
 class Category {
+ public:
+  using Meals = std::vector<Meal>;
+
  private:
   std::string m_name;
-  std::vector<Meal> m_entries;
+  Meals m_meals;
   fs::path m_file;
 
   friend Menu;
@@ -22,6 +25,11 @@ class Category {
  public:
   Category() = default;
 
+  /**
+   * @brief Construct a new Category object
+   *
+   * @param category_path path to a file, from which to load this category
+   */
   Category(fs::path category_path);
 
   /**
@@ -36,10 +44,6 @@ class Category {
    *
    * @return const std::vector<Meal>&
    */
-  const std::vector<Meal>& meals() const;
-
-  // void add_entry(std::string_view entry_name, uint entry_price);
-
-  // void writeToFile() const;
+  const Meals& meals() const;
 };
 #endif  // __CATEGORY_H__

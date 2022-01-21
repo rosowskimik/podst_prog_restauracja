@@ -6,4 +6,10 @@
 
 namespace fs = std::filesystem;
 
-std::string get_name(fs::path setup_file);
+/**
+ * @brief Load name
+ *
+ * @param setup_file path to setup file
+ * @return std::string
+ */
+std::string load_name(fs::path setup_file);

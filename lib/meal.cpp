@@ -8,15 +8,14 @@
 namespace fs = std::filesystem;
 
 Meal::Meal(std::istream& input) {
+  // Meal name
   std::getline(input, m_name);
 
+  // Meal price
   std::string buffer;
   std::getline(input, buffer);
   m_price = std::stod(buffer);
 }
-
-Meal::Meal(std::string_view name, double price)
-    : m_name(name), m_price(price) {}
 
 bool Meal::operator==(const Meal& rhs) const {
   return m_name == rhs.m_name && m_price == rhs.m_price;

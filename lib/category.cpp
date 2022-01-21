@@ -12,29 +12,18 @@ namespace fs = std::filesystem;
 
 Category::Category(fs::path category_path)
     : m_name(category_path.stem().string()), m_file(category_path) {
-  std::ifstream file(category_path, std::fstream::in);
+  // If file isn't empty
+  if (!fs::is_empty(category_path)) {
+    std::ifstream file(category_path, std::fstream::in);
 
-  while (!file.eof()) {
-    m_entries.push_back(std::move(Meal(file)));
+    // While cursor not at eof
+    // Load it's contents into memory, until eof.
+    while (!file.eof()) {
+      m_meals.emplace_back(file);
+    }
   }
 }
 
 const std::string& Category::name() const { return m_name; }
 
-const std::vector<Meal>& Category::meals() const { return m_entries; }
-
-// void Category::add_entry(std::string_view entry_name, uint entry_price) {
-//   m_entries.emplace_back(entry_name, entry_price);
-//   writeToFile();
-// }
-
-// void Category::writeToFile() const {
-//   std::fstream file(m_file, std::fstream::trunc | std::fstream::out);
-
-//   for (const auto& entry : m_entries) {
-//     file << entry;
-//     if (!(entry == m_entries.back())) {
-//       file << '\n';
-//     }
-//   }
-// }
+const Category::Meals& Category::meals() const { return m_meals; }

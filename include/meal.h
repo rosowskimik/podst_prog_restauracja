@@ -17,29 +17,33 @@ class Meal {
  public:
   Meal() = default;
 
+  /**
+   * @brief Construct a new Meal object
+   *
+   * @param input an input stream to load this Meal from
+   */
   Meal(std::istream& input);
-
-  Meal(std::string_view name, double price);
 
   bool operator==(const Meal& rhs) const;
 
   /**
-   * @brief Get meals name
+   * @brief Get Meal name
    *
    * @return const std::string&
    */
   const std::string& name() const;
 
   /**
-   * @brief Get meals price
+   * @brief Get Meal price
    *
-   * @return const uint&
+   * @return const double&
    */
   const double& price() const;
 
   friend std::ostream& operator<<(std::ostream& os, const Meal& e);
 };
 
+// Hash implementation for using Meal as a hashed key.
 namespace std {
 template <>
 struct hash<Meal> {

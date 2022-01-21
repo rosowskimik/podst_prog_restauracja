@@ -21,6 +21,10 @@ class History {
   Orders m_orders;
   fs::path m_histfile;
 
+  /**
+   * @brief Save All Orders to a history file
+   *
+   */
   void writeToFile() const;
 
  public:
@@ -34,16 +38,18 @@ class History {
   History(fs::path history_path);
 
   /**
-   * @brief Returns a list of orders.
+   * @brief Returns a list of Orders.
    *
-   * @return const Orders&
+   * @return const std::vector<Order>&
    */
   const Orders& orders() const;
 
   /**
    * @brief Saves the order to history file.
    *
-   * @param order order to save
+   * @param order Order to save
+   *
+   * @see Order
    */
   void save_order(const Order& order);
 };
