@@ -9,10 +9,10 @@ int main() {
   Menu menu("data/menu");
 
   // Ścieżka do pliku z historią zamówień
-  History historia("data/history.txt");
+  History historia("data/orders.txt");
 
   // Wyciągnij nazwę restauracji z pliku
-  std::string nazwa = load_name("data/setup.txt");
+  std::string nazwa = read_file("data/setup.txt");
   std::cout << nazwa << '\n';
 
   std::cout << std::endl;

@@ -10,7 +10,7 @@
 
 namespace fs = std::filesystem;
 
-std::string load_name(fs::path setup_file) {
+std::string read_file(fs::path setup_file) {
   // Read setup file
   std::fstream setup(setup_file, std::fstream::in);
 
