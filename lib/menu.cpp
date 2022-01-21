@@ -14,7 +14,7 @@ namespace fs = std::filesystem;
 Menu::Menu(fs::path menu_path) : m_directory(menu_path) {
   for (const auto& file : fs::directory_iterator(menu_path)) {
     if (file.is_regular_file()) {
-      m_categories.push_back(std::move(Category(file)));
+      m_categories.emplace_back(file);
     }
   }
 }
