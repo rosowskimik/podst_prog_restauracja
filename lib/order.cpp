@@ -3,6 +3,7 @@
 #include <ctime>
 #include <iomanip>
 #include <iostream>
+#include <iterator>
 #include <sstream>
 #include <string>
 #include <unordered_map>
@@ -81,6 +82,26 @@ void Order::add_meal(const Meal& m) {
   } else {
     // Otherwise, add it with count = 1
     m_meals[m] = 1;
+  }
+}
+
+void Order::remove_meal(size_t index) {
+  // Get the iterator
+  auto it = m_meals.begin();
+
+  // Advance it to position at index
+  std::advance(it, index);
+
+  // If it's count is > 1
+  if (it->second > 1) {
+    // just decrement it
+    --(it->second);
+  } else {
+    // Otherwise erase the element
+    // ! Although this is an unordered_map, erasing an element still preserves
+    //   the order of leftover elements
+    //   (https://en.cppreference.com/w/cpp/container/unordered_map/erase)
+    m_meals.erase(it);
   }
 }
 

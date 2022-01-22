@@ -64,6 +64,9 @@ int main() {
   // Data zamówienia jest ustawiana automatycznie na dzisiejszą
   std::cout << new_order.date() << '\n';
 
+  // Ups, jednak nie chcę dania nr. 2 (1, ponieważ indeksujemy od zera)
+  new_order.remove_meal(1);
+
   // Możemy wyciągnąć łączną kwotę do zapłaty za zamówienie
   std::cout << "Do zaplaty: " << new_order.price_sum() << '\n';
 

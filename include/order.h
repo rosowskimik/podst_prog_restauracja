@@ -65,6 +65,13 @@ class Order {
    */
   void add_meal(const Meal& m);
 
+  /**
+   * @brief Decrement the count of Meal entry at index
+   *
+   * @param index index of entry
+   */
+  void remove_meal(size_t index);
+
   friend std::ostream& operator<<(std::ostream& os, const Order& o);
 };
 #endif  // __ORDER_H__
