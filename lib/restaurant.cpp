@@ -6,8 +6,6 @@
 #include <sstream>
 #include <string>
 
-#include "menu.h"
-
 namespace fs = std::filesystem;
 
 std::string read_file(fs::path setup_file) {

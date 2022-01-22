@@ -43,6 +43,13 @@ class Order {
   const Entiries& entries() const;
 
   /**
+   * @brief Get Order's unique meals count
+   *
+   * @return const size_t
+   */
+  const size_t meals_count() const;
+
+  /**
    * @brief Returns the price of all Meals in order.
    *
    * @return const double

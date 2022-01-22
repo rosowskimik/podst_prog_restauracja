@@ -37,7 +37,7 @@ int main() {
   std::cout << std::endl;
 
   // Utwórz nowe zamówienie
-  Order new_order = menu.new_order();
+  Order new_order;
 
   // Spróbuj wyciągnąć danie po indeksie
   // (jeśli będziemy poza indeksem, to się wysypiemy)
@@ -57,6 +57,9 @@ int main() {
     std::cout << meal.name() << " : " << meal.price() << " -> " << count
               << '\n';
   }
+
+  // Możemy też sprawdzić ilość unikalnych dań w zamówieniu
+  std::cout << new_order.meals_count() << '\n';
 
   // Data zamówienia jest ustawiana automatycznie na dzisiejszą
   std::cout << new_order.date() << '\n';

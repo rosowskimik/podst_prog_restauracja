@@ -7,7 +7,6 @@
 
 #include "category.h"
 #include "meal.h"
-#include "order.h"
 
 namespace fs = std::filesystem;
 
@@ -51,13 +50,5 @@ class Menu {
    * @warning This function will throw if index >= Menu::size()
    */
   const Meal& meal(size_t index) const;
-
-  /**
-   * @brief Creates new Order object.
-   *
-   * @return Order
-   * @see Order
-   */
-  Order new_order() const;
 };
 #endif  // __MENU_H__

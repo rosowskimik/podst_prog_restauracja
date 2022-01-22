@@ -59,6 +59,8 @@ const std::string& Order::date() const { return m_date; }
 
 const Order::Entiries& Order::entries() const { return m_meals; }
 
+const size_t Order::meals_count() const { return m_meals.size(); }
+
 const double Order::price_sum() const {
   double sum = 0;
 

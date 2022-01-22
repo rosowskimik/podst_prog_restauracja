@@ -7,7 +7,6 @@
 #include <vector>
 
 #include "category.h"
-#include "order.h"
 
 namespace fs = std::filesystem;
 
@@ -48,5 +47,3 @@ size_t Menu::size() const {
 
   return size;
 }
-
-Order Menu::new_order() const { return Order{}; }
