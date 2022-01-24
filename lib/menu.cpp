@@ -7,21 +7,27 @@
 #include <vector>
 
 #include "category.h"
+#include "check.h"
 
 namespace fs = std::filesystem;
 
 Menu::Menu(fs::path menu_path) : m_directory(menu_path) {
+  // Check if path exists, refers to directory && isn't empty
+  check_path_exists(menu_path);
+  check_path_is_directory(menu_path);
+  check_path_not_empty(menu_path);
+
   for (const auto& file : fs::directory_iterator(menu_path)) {
-    if (file.is_regular_file()) {
-      m_categories.emplace_back(file);
-    }
+    // Check if path refers to file
+    check_path_is_file(file);
+
+    m_categories.emplace_back(file);
   }
 }
 
 const std::vector<Category>& Menu::categories() const { return m_categories; }
 
 const Meal& Menu::meal(size_t index) const {
-  // Bounds checking
   assert(index <= size());
 
   // For all categories
@@ -35,7 +41,7 @@ const Meal& Menu::meal(size_t index) const {
       index -= category.meals().size();
     }
   }
-  // Unreachable (If we're out of bounds, we've already thrown at assert)
+  // Unreachable!
 }
 
 size_t Menu::size() const {

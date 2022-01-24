@@ -13,8 +13,8 @@ using uint = unsigned int;
 namespace fs = std::filesystem;
 
 History::History(fs::path history_path) : m_histfile(history_path) {
-  // If file exists && isn't empty
-  if (fs::exists(history_path) && !fs::is_empty(history_path)) {
+  // check If file exists
+  if (fs::exists(history_path) && fs::is_regular_file(history_path)) {
     std::fstream day_file(history_path, std::fstream::in);
 
     // While cursor not at eof or one before

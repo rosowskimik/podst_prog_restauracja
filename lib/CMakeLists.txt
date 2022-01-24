@@ -1,5 +1,6 @@
 # .h + .cpp files
 list(APPEND LIB_LIST
+    check
     meal
     category
     menu

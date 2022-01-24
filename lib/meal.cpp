@@ -1,11 +1,8 @@
 #include "meal.h"
 
-#include <filesystem>
 #include <iostream>
 #include <string>
 #include <string_view>
-
-namespace fs = std::filesystem;
 
 Meal::Meal(std::istream& input) {
   // Meal name
