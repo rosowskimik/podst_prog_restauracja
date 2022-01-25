@@ -58,9 +58,17 @@ bool Order::operator==(const Order& rhs) const {
 
 const std::string& Order::date() const { return m_date; }
 
-const Order::Entiries& Order::entries() const { return m_meals; }
+const Order::Entries& Order::entries() const { return m_meals; }
 
 const size_t Order::meals_count() const { return m_meals.size(); }
+
+const size_t Order::size() const {
+  size_t size = 0;
+  for (const auto& [_, count] : m_meals) {
+    size += count;
+  }
+  return size;
+}
 
 const double Order::price_sum() const {
   double sum = 0;

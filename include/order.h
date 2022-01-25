@@ -10,11 +10,11 @@ using uint = unsigned int;
 
 class Order {
  public:
-  using Entiries = std::unordered_map<Meal, uint>;
+  using Entries = std::unordered_map<Meal, uint>;
 
  private:
   std::string m_date;
-  Entiries m_meals;
+  Entries m_meals;
 
  public:
   Order();
@@ -40,7 +40,7 @@ class Order {
    *
    * @return const std::unordered_map<Meal, unsigned int>&
    */
-  const Entiries& entries() const;
+  const Entries& entries() const;
 
   /**
    * @brief Get Order's unique meals count
@@ -48,6 +48,13 @@ class Order {
    * @return const size_t
    */
   const size_t meals_count() const;
+
+  /**
+   * @brief Get Order's meals count
+   *
+   * @return const size_t
+   */
+  const size_t size() const;
 
   /**
    * @brief Returns the price of all Meals in order.
