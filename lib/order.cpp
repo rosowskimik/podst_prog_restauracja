@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <iostream>
 #include <iterator>
+#include <random>
 #include <sstream>
 #include <string>
 #include <unordered_map>
@@ -18,6 +19,15 @@ Order::Order() : m_meals(0) {
   // now -> date format
   auto tm = std::localtime(&t);
 
+  // Random ID
+  m_id.resize(15);
+  std::default_random_engine engine;
+  std::uniform_int_distribution<char> gen(33, 126);
+
+  for (auto& c : m_id) {
+    c = gen(engine);
+  }
+
   // date format -> string
   std::stringstream date;
   date << std::put_time(tm, "%Y-%m-%d");
@@ -29,6 +39,9 @@ Order::Order(std::istream& in) : m_meals(0) {
 
   // Date
   std::getline(in, m_date);
+
+  // Id
+  std::getline(in, m_id);
 
   // Length of orders meals
   std::getline(in, buffer);
@@ -52,11 +65,11 @@ Order::Order(std::istream& in) : m_meals(0) {
   }
 };
 
-bool Order::operator==(const Order& rhs) const {
-  return m_meals == rhs.m_meals;
-}
+bool Order::operator==(const Order& rhs) const { return m_id == rhs.m_id; }
 
 const std::string& Order::date() const { return m_date; }
+
+const std::string& Order::id() const { return m_id; }
 
 const Order::Entries& Order::entries() const { return m_meals; }
 
@@ -115,11 +128,12 @@ void Order::remove_meal(size_t index) {
 
 std::ostream& operator<<(std::ostream& os, const Order& o) {
   // Date\n
+  // Id
   // Unique meals in order\n
   // Meal\n
   // meal's count
   size_t size = o.m_meals.size();
-  os << o.m_date << '\n' << size << '\n';
+  os << o.m_date << '\n' << o.m_id << '\n' << size << '\n';
   for (const auto& [key, val] : o.m_meals) {
     os << key << '\n' << val;
 

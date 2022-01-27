@@ -114,7 +114,7 @@ void printCurrentOrder(Order& currOrder) {
 }
 
 void printOrderHistoryRow(int id, Order orderData) {
-  printDashedLine("-", 90);
+  printDashedLine("-", 107);
   auto iter = orderData.entries().begin();
   std::cout << "|    "
             // numer
@@ -123,6 +123,9 @@ void printOrderHistoryRow(int id, Order orderData) {
             // data
             << orderData.date()
             << "  | "
+            // Id
+            << orderData.id()
+            << " | "
             // miejszce na nazwę dania (32 - dóugoóóDania)
             << iter->first.name() << std::fixed << std::setprecision(2)
             << getFilledString(' ', iter->first.name().length(), 32)
@@ -146,6 +149,9 @@ void printOrderHistoryRow(int id, Order orderData) {
               // data
               << getFilledString(' ', 0, 10)
               << "  | "
+              // Id
+              << getFilledString(' ', 0, 15)
+              << " | "
               // miejszce na nazwę dania (32 - długośćDania)
               << meal.name() << getFilledString(' ', meal.name().length(), 32)
               << "| "
@@ -166,6 +172,9 @@ void printOrderHistoryRow(int id, Order orderData) {
             // data
             << getFilledString(' ', 0, 10)
             << "  | "
+            // Id
+            << getFilledString(' ', 0, 15)
+            << " | "
             // miejszce na nazwę dania (32 - długośćDania)
             << getFilledString(' ', 0, 32)
             << "| "
@@ -185,9 +194,9 @@ void printOrderHistory(const std::vector<Order>& orderHistoryData) {
   // nagłówek
 
   std::cout << std::endl;
-  printDashedLine("-", 90);
+  printDashedLine("-", 107);
   std::string historymenu(
-      "|     # | Data        | Dania "
+      "|     # | Data        | Id              | Dania "
       "                          | Cena  | N  | C * N    |  Suma |");
   std::cout << historymenu << std::endl;
   // koniec nagłówka
@@ -196,10 +205,10 @@ void printOrderHistory(const std::vector<Order>& orderHistoryData) {
     printOrderHistoryRow(i + 1, orderHistoryData[i]);
     order_sum += orderHistoryData[i].price_sum();
   }
-  printDashedLine("-", 90);
+  printDashedLine("-", 107);
   std::stringstream sum_string;
   sum_string << "SUMA: " << std::fixed << std::setprecision(2) << order_sum;
-  std::cout << "|" << getFilledString(' ', 0, 86 - sum_string.str().length())
+  std::cout << "|" << getFilledString(' ', 0, 104 - sum_string.str().length())
             << sum_string.str() << " |" << std::endl;
-  printDashedLine("-", 90);
+  printDashedLine("-", 107);
 }

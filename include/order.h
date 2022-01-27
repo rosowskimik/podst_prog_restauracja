@@ -14,6 +14,7 @@ class Order {
 
  private:
   std::string m_date;
+  std::string m_id;
   Entries m_meals;
 
  public:
@@ -34,6 +35,8 @@ class Order {
    * @return const std::string&
    */
   const std::string& date() const;
+
+  const std::string& id() const;
 
   /**
    * @brief Get Order's Meals
