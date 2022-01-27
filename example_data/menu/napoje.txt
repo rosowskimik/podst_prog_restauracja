@@ -1,2 +1,6 @@
-Coca - Cola
-5.99
+Woda
+02.99
+Cola
+04.99
+Sok
+06.99

@@ -1,4 +1,6 @@
-Pepperoni
-13.37
-Visuvio
-12.20
+Pizza Serowa
+19.99
+Pizza Ser i szynka
+24.99
+Pizza Ser i pieczarki
+22.99
