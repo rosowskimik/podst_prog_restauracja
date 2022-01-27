@@ -81,7 +81,7 @@ void printRestaurantMenu(Menu& menu) {
   printDashedLine(" MENU ", 52);
   int id = 1;
   for (const Category& category : menu.categories()) {
-    // Wydrukuj nazwó kategorii:
+    // Wydrukuj nazwę kategorii:
     std::cout << "|" << getFilledString(' ', 0) << "|" << std::endl;
     std::cout << "|\t" << category.name()
               << getFilledString(' ', category.name().length() + 7) << "|"
@@ -141,7 +141,7 @@ void printOrderHistoryRow(int id, Order orderData) {
             << iter->first.price() * iter->second << "    |     - |"
             << std::endl;
   for (iter++; iter != orderData.entries().end(); iter++) {
-    auto [meal, count] = *iter;
+    auto& [meal, count] = *iter;
     std::cout << "|    "
               // numer
               << getFilledString(' ', 0, 2)
@@ -156,13 +156,15 @@ void printOrderHistoryRow(int id, Order orderData) {
               << meal.name() << getFilledString(' ', meal.name().length(), 32)
               << "| "
               // cena
-              << std::setfill('0') << std::setw(5) << std::fixed
-              << std::setprecision(2) << meal.price()
+              << std::fixed << std::setprecision(2)
+              << std::setfill('0') << std::setw(5)  
+              << meal.price()
               << " | "
               // ile razy danie zostało zamówione
               << count
               << "  | "
               // cena razy ilość
+              << std::setfill('0') << std::setw(5) 
               << meal.price() * count << "    |     - |" << std::endl;
   }
   std::cout << "|    "
