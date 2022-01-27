@@ -21,11 +21,11 @@ Order::Order() : m_meals(0) {
 
   // Random ID
   m_id.resize(15);
-  std::default_random_engine engine;
-  std::uniform_int_distribution<char> gen(33, 126);
+  std::mt19937 engine{std::random_device{}()};
+  std::uniform_int_distribution<int> gen(33, 126);
 
   for (auto& c : m_id) {
-    c = gen(engine);
+    c = static_cast<char>(gen(engine));
   }
 
   // date format -> string
