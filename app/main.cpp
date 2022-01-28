@@ -22,8 +22,8 @@ int getOption(std::string msg, int min, int max) {
   return result;
 }
 
-int handleRestaurantMenu() {
-  Order new_order;
+Order* handleOrderAdd(Order* ord) {
+
   printRestaurantMenu(menu);
   std::cout
       << "Proszę podać numery id dań jakie mają zostać dodane do zamówienia,"
@@ -32,38 +32,111 @@ int handleRestaurantMenu() {
   std::cout << std::endl;
 
   int option;
+  Order new_order;
 
   // Handle order input
   while (true) {
-    option =
-        getOption("Proszę podać numer id dania: ", 0, menu.size());
+    option = getOption("Proszę podać numer id dania: ", 0, menu.size());
 
     if (option == 0) break;
-    if (option == -1) {
+    else if (option == -1) {
       printError("Proszę podać poprawne id dania");
-    } else
+    } else {
       new_order.add_meal(menu.meal(option - 1));
+    }
 
-    if (new_order.size() >= 10) 
-        break;
+    if (new_order.size() + ord->size() >= 10) break;
   }
 
-  printCurrentOrder(new_order);
+  for (const auto& [meal, count] : new_order.entries()) 
+  {
+    for (int i = 0; i < count; i++) ord->add_meal(meal);
+  }
+
+  return ord;
+}
+
+Order* handleOrderRemove(Order* ord) {
+
+  std::cout << std::endl
+      << "Proszę podać numery id dań jakie mają zostać usunięte z zamówienia,"
+      << "\nwpisanie 0 spowoduje przejście do następnego kroku." << std::endl;
+
+  std::cout << std::endl;
+
+  int option;
+
+  // Handle order input
+  while (true) {
+
+    printCurrentOrder(*ord);
+
+    option =
+        getOption("Proszę podać numer id dania do usunięcia: ", 0, ord->entries().size());
+
+    if (option == 0) break;
+    else if (option == -1) {
+      printError("Proszę podać poprawne id dania");
+    } else
+      ord->remove_meal(option - 1);
+
+    if (ord->size() <= 0) break;
+  }
+
+  return ord;
+}
+
+int handleRestaurantMenu() {
+
+  Order* new_order = new Order();
+  new_order = handleOrderAdd(new_order);
+
+  int option;
+
+  bool handlingOrder = true;
+
+  static const std::string avOptions[] = {
+      "Potwierdź zamówienie", "Usuń dania z zamówienia",
+      "Dodaj dania do zamówienia", "Anuluj zamówienie"};
+
+  static const int optionsCount = sizeof(avOptions) / sizeof(avOptions[0]);
 
   // Handle after order summary input
-  option = getOption("Proszę wybrać opcję: ", 0, 3);
-  // Accept
-  
-  // Delete from
-  
-  // Add
+  while (handlingOrder) {
 
-  // Cancel
+    printCurrentOrder(*new_order);
+    
+    printMainMenu(avOptions, optionsCount);
 
+    option = getOption("Proszę wybrać opcję: ", 0, optionsCount - 1);
 
+    switch (option) {
+      case -1:
+        printError("Proszę wybrać poprawną opcję");
+        break;
 
-  if (new_order.size())
-    history.save_order(new_order);
+      case 0:
+        handlingOrder = false;
+        break;
+
+      case 1:
+        new_order = handleOrderRemove(new_order);
+        break;
+
+      case 2:
+        new_order = handleOrderAdd(new_order);
+        break;
+
+      case 3:
+        return 1;
+
+      default:
+        printError("Coś poszło nie tak");
+        break;
+    }
+  }
+
+  if (new_order->size()) history.save_order(*new_order);
 
   return 0;
 }
