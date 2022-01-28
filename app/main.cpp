@@ -22,8 +22,7 @@ int getOption(std::string msg, int min, int max) {
   return result;
 }
 
-Order* handleOrderAdd(Order* ord) {
-
+void handleOrderAdd(Order& ord) {
   printRestaurantMenu(menu);
   std::cout
       << "Proszę podać numery id dań jakie mają zostać dodane do zamówienia,"
@@ -32,33 +31,26 @@ Order* handleOrderAdd(Order* ord) {
   std::cout << std::endl;
 
   int option;
-  Order new_order;
 
   // Handle order input
   while (true) {
     option = getOption("Proszę podać numer id dania: ", 0, menu.size());
 
-    if (option == 0) break;
+    if (option == 0)
+      break;
     else if (option == -1) {
       printError("Proszę podać poprawne id dania");
     } else {
-      new_order.add_meal(menu.meal(option - 1));
+      ord.add_meal(menu.meal(option - 1));
     }
 
-    if (new_order.size() + ord->size() >= 10) break;
+    if (ord.size() >= 10) break;
   }
-
-  for (const auto& [meal, count] : new_order.entries()) 
-  {
-    for (int i = 0; i < count; i++) ord->add_meal(meal);
-  }
-
-  return ord;
 }
 
-Order* handleOrderRemove(Order* ord) {
-
-  std::cout << std::endl
+void handleOrderRemove(Order& ord) {
+  std::cout
+      << std::endl
       << "Proszę podać numery id dań jakie mają zostać usunięte z zamówienia,"
       << "\nwpisanie 0 spowoduje przejście do następnego kroku." << std::endl;
 
@@ -68,28 +60,26 @@ Order* handleOrderRemove(Order* ord) {
 
   // Handle order input
   while (true) {
+    printCurrentOrder(ord);
 
-    printCurrentOrder(*ord);
+    option = getOption("Proszę podać numer id dania do usunięcia: ", 0,
+                       ord.entries().size());
 
-    option =
-        getOption("Proszę podać numer id dania do usunięcia: ", 0, ord->entries().size());
-
-    if (option == 0) break;
+    if (option == 0)
+      break;
     else if (option == -1) {
       printError("Proszę podać poprawne id dania");
-    } else
-      ord->remove_meal(option - 1);
+    } else {
+      ord.remove_meal(option - 1);
+    }
 
-    if (ord->size() <= 0) break;
+    if (ord.size() <= 0) break;
   }
-
-  return ord;
 }
 
 int handleRestaurantMenu() {
-
-  Order* new_order = new Order();
-  new_order = handleOrderAdd(new_order);
+  Order new_order;
+  handleOrderAdd(new_order);
 
   int option;
 
@@ -103,9 +93,8 @@ int handleRestaurantMenu() {
 
   // Handle after order summary input
   while (handlingOrder) {
+    printCurrentOrder(new_order);
 
-    printCurrentOrder(*new_order);
-    
     printMainMenu(avOptions, optionsCount);
 
     option = getOption("Proszę wybrać opcję: ", 0, optionsCount - 1);
@@ -120,11 +109,11 @@ int handleRestaurantMenu() {
         break;
 
       case 1:
-        new_order = handleOrderRemove(new_order);
+        handleOrderRemove(new_order);
         break;
 
       case 2:
-        new_order = handleOrderAdd(new_order);
+        handleOrderAdd(new_order);
         break;
 
       case 3:
@@ -136,7 +125,7 @@ int handleRestaurantMenu() {
     }
   }
 
-  if (new_order->size()) history.save_order(*new_order);
+  if (new_order.size()) history.save_order(new_order);
 
   return 0;
 }
@@ -221,7 +210,7 @@ int handleMenu() {
     const int option = getOption("Proszę wybrać opcję: ", 0, optionsCount - 1);
 
     if (option == 0) {
-      std::cout << "Podano 0 - program kończy działanie";
+      std::cout << "Podano 0 - program kończy działanie" << std::endl;
       return 0;
     } else {
       executeMenuOption(option);
