@@ -4,7 +4,7 @@
 
 ## Opis
 Projekt zaliczeniowy z przedmiotu podstawy programowania.
-Aplikacja konsolowa, pozwalająca na wyświetlanie menu restauracji, tworzenie zamówień i przegląd ich historii.
+Aplikacja konsolowa pozwalająca na wyświetlanie menu restauracji, tworzenie zamówień i przegląd ich historii.
 
 Folder `example_data` zawiera strukturę plików, która jest wykorzystywana przez aplikację. Aby je wykorzystać, należy zmienić nazwę folderu z `example_data` na `data`.
 
