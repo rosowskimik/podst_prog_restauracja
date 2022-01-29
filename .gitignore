@@ -717,3 +717,4 @@ FodyWeavers.xsd
 data/
 restauracja
 restauracja.exe
+CMakeSettings.json
