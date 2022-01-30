@@ -20,3 +20,8 @@ add_subdirectory(lib)
 
 # Main app
 add_subdirectory(app)
+
+# Setup install
+install(TARGETS restauracja DESTINATION .)
+install(FILES assets/instrukcja.pdf DESTINATION .)
+install(DIRECTORY example_data/ DESTINATION ./data)
