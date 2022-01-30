@@ -8,6 +8,8 @@ Aplikacja konsolowa pozwalająca na wyświetlanie menu restauracji, tworzenie za
 
 Folder `example_data` zawiera strukturę plików, która jest wykorzystywana przez aplikację. Aby je wykorzystać, należy zmienić nazwę folderu z `example_data` na `data`.
 
+Aplikacja jest dostępna do pobrania [tutaj](https://github.com/rosowskimik/podst_prog_restauracja/releases).
+
 Szczegóły dotyczące samej obsługi aplikacji są dostępne w [instrukcji](assets/instrukcja.pdf).
 
 ## Budowa z kodu źródłowego
