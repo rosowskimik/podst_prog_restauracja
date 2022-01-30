@@ -132,13 +132,11 @@ jobs:
         with:
           path: release
 
-      - name: Test
-        run: |
-          ls -lah release
-
       - if: github.event_name == 'workflow_dispatch'
+        name: Set tag name (dispatch)
         run: echo "TAG_NAME=${{ github.event.inputs.tag_name }}" >> $GITHUB_ENV
       - if: github.event_name == 'push'
+        name: Set tag name
         run: |
           TAG_NAME=${{ github.ref }}
           echo "TAG_NAME=${TAG_NAME#refs/tags/}" >> $GITHUB_ENV
